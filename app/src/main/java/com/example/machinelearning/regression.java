@@ -3,6 +3,15 @@ package com.example.machinelearning;
 public class regression {
     public static double alpha = 0.001;
     public static int iterations = 1000;
+    public static int m;
+    public int getM() {
+        return m;
+    }
+
+    // Setter
+    public static void setM(int x) {
+         m = x;
+    }
 
     public static double main(double[] x, double[] y, double theta[], int est)
     {
@@ -64,8 +73,8 @@ public class regression {
             }
             // sum has the hypothesis value minus y.
             // 3 represents training sessions.
-            thetaZero = theta[0] - alpha * 1/3 * sum;
-            thetaOne = theta[1] - alpha * 1/3 * mult;
+            thetaZero = theta[0] - alpha * 1/m * sum;
+            thetaOne = theta[1] - alpha * 1/m * mult;
             theta[0] = thetaZero;
             theta[1] = thetaOne;
             if (costFunction(x, y, theta) < min)

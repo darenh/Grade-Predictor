@@ -9,31 +9,62 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button test;
+    EditText Type1;
+    EditText Type2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         test = (Button) findViewById(R.id.test);
+        Type1 = (EditText) findViewById(R.id.text1);
+        Type2 = (EditText) findViewById(R.id.text2);
         test.setOnClickListener(this);
     }
         public void onClick(View v) {
             int i;
+            int r = 0;
             if (v == (Button) findViewById(R.id.test)) {
+                String str1 = Type1.getText().toString();
+                String str2 = Type2.getText().toString();
+                str1 = str1.replace(",", "");
+                str2 = str2.replace(",", "");
+                String[] integerStrings = str1.split(" ");
+                String[] integerStrings2 = str2.split(" ");
+                double x[] = new double[integerStrings.length];
+                double y[] = new double[integerStrings2.length];
+                for (i = 0; i < integerStrings.length; i++)
+                {
+                    x[i] = Double.parseDouble(integerStrings[i]);
+                    y[i] = Double.parseDouble(integerStrings2[i]);
+                }
                 double j;
-                double x[] = {5, 8, 10};
+                int m = 3;
+                char c;
                 // F = 0, D = 1 ... A = 4
-                double y[] = {1, 3, 4};
                 double theta[] = {0, 0};
-                j = regression.main(x, y, theta, 9);
-                if (j > 4)
+                regression.setM(m);
+                j = 0;
+                j = regression.main(x, y, theta,9);
+                if (j > 3.5)
                 {
                     j = 4;
                 }
-                System.out.println("Official Jt: " + j);
+                if ( j < 0)
+                {
+                    j = 0;
+                    c = (char) ('f' - j);
+                    System.out.println("Official Jt: " + c);
+                }
+                else
+                {
+                    c = (char) ('f' - j - 1);
+                    System.out.println("Official Jt: " + c);
+                }
             }
         }
 
