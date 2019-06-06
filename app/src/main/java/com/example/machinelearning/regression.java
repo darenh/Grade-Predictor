@@ -11,6 +11,7 @@ public class regression {
     // Setter
     public static void setM(int x) {
          m = x;
+        System.out.println(m);
     }
 
     public static double main(double[] x, double[] y, double theta[], int est)
@@ -30,7 +31,7 @@ public class regression {
     public static double costFunction(double x[], double y[], double theta[]) {
         double j = 0, sum = 0;
         int i;
-        double hyp[] = new double[3];
+        double hyp[] = new double[m];
         for (i = 0; i < x.length; i++) {
             hyp[i] += theta[1] * x[i] + theta[0];
         }
@@ -38,9 +39,9 @@ public class regression {
             hyp[i] = power(hyp[i] - y[i]);
             sum += hyp[i];
         }
-        j = 1 / (2 * 3.0) * sum;
-        System.out.println("theta0: " + theta[0] + "theta1: " + theta[1]);
-        System.out.println("j: " + j);
+        j = 1 / (2.0 * m) * sum;
+       // System.out.println("theta0: " + theta[0] + "theta1: " + theta[1]);
+        //System.out.println("j: " + j);
         return j;
     }
     public static double minim(double x, double y)
@@ -56,8 +57,8 @@ public class regression {
         int i, n;
         double store[] = new double[2];
         double thetaZero, thetaOne;
-        double hyp[] = new double[3];
-        double yes[] = new double[3];
+        double hyp[] = new double[m];
+        double yes[] = new double[m];
         double sum = 0, mult = 0, min = costFunction(x, y, theta);
         for (n = 0; n < iterations; n++)
         {
@@ -84,6 +85,7 @@ public class regression {
                 store[1] = theta[1];
             }
         }
+        System.out.println("Min: " + min);
         // sum has the hypothesis value minus y.
         // 3 represents training sessions.
         return store;

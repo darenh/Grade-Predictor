@@ -10,11 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button test;
     EditText Type1;
     EditText Type2;
+    TextView Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         test = (Button) findViewById(R.id.test);
         Type1 = (EditText) findViewById(R.id.text1);
         Type2 = (EditText) findViewById(R.id.text2);
+        Text = (TextView) findViewById(R.id.view);
         test.setOnClickListener(this);
     }
         public void onClick(View v) {
@@ -43,27 +46,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     y[i] = Double.parseDouble(integerStrings2[i]);
                 }
                 double j;
-                int m = 3;
+                int m = integerStrings.length;
                 char c;
                 // F = 0, D = 1 ... A = 4
                 double theta[] = {0, 0};
                 regression.setM(m);
                 j = 0;
-                j = regression.main(x, y, theta,9);
+                j = regression.main(x, y, theta,6);
                 if (j > 3.5)
                 {
                     j = 4;
+                    c = (char) ('f' - j - 1);
+                    Text.setText("6 hours of sleep: " + c);
                 }
-                if ( j < 0)
+                else if ( j < 0)
                 {
                     j = 0;
                     c = (char) ('f' - j);
                     System.out.println("Official Jt: " + c);
+                    Text.setText("6 hours of sleep: " + c);
                 }
                 else
                 {
                     c = (char) ('f' - j - 1);
                     System.out.println("Official Jt: " + c);
+                    Text.setText("6 hours of sleep: " + c);
                 }
             }
         }
