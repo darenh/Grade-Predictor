@@ -2,15 +2,18 @@ package com.example.machinelearning;
 
 public class regression {
     public static double alpha = 0.001;
-    public static int iterations = 1000;
-    public static int m;
-    public int getM() {
+    public static int iterations = 7000;
+    public static double m;
+    public static int r;
+
+    public double getM() {
         return m;
     }
 
     // Setter
     public static void setM(int x) {
          m = x;
+         r = x;
         System.out.println(m);
     }
 
@@ -31,7 +34,7 @@ public class regression {
     public static double costFunction(double x[], double y[], double theta[]) {
         double j = 0, sum = 0;
         int i;
-        double hyp[] = new double[m];
+        double hyp[] = new double[r];
         for (i = 0; i < x.length; i++) {
             hyp[i] += theta[1] * x[i] + theta[0];
         }
@@ -57,25 +60,22 @@ public class regression {
         int i, n;
         double store[] = new double[2];
         double thetaZero, thetaOne;
-        double hyp[] = new double[m];
-        double yes[] = new double[m];
-        double sum = 0, mult = 0, min = costFunction(x, y, theta);
+        double hyp[] = new double[r];
+        double yes[] = new double[r];
+        double sum = 0.0, mul = 0.0, min = costFunction(x, y, theta);
         for (n = 0; n < iterations; n++)
         {
             for (i = 0; i < x.length; i++)
             {
                 hyp[i] = theta[0] + (theta[1] * x[i]);
                 yes[i] = (hyp[i] - y[i]) * x[i];
+                mul += yes[i];
                 sum += hyp[i] - y[i];
-            }
-            for (i = 0; i < x.length; i++)
-            {
-                mult += yes[i];
             }
             // sum has the hypothesis value minus y.
             // 3 represents training sessions.
             thetaZero = theta[0] - alpha * 1/m * sum;
-            thetaOne = theta[1] - alpha * 1/m * mult;
+            thetaOne = theta[1] - alpha * (1/m * mul);
             theta[0] = thetaZero;
             theta[1] = thetaOne;
             if (costFunction(x, y, theta) < min)
