@@ -53,24 +53,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 regression.setM(m);
                 j = 0;
                 j = regression.main(x, y, theta,6);
-                if (j > 3.5)
+                int s = (int)j;
+                if (j > 90)
                 {
-                    j = 4;
+                    j = 100;
                     c = (char) ('f' - j - 1);
-                    Text.setText("6 hours of sleep: " + c);
+                    Text.setText("6 hours of sleep: " + s + "%");
                 }
                 else if ( j < 0)
                 {
                     j = 0;
                     c = (char) ('f' - j);
                     System.out.println("Official Jt: " + c);
-                    Text.setText("6 hours of sleep: " + c);
+                    Text.setText("6 hours of sleep: " + "F" + "%");
                 }
                 else
                 {
-                    c = (char) ('f' - j - 1);
-                    System.out.println("Official Jt: " + c);
-                    Text.setText("6 hours of sleep: " + c);
+                    Text.setText("6 hours of sleep: " + s + "%");
                 }
             }
         }
