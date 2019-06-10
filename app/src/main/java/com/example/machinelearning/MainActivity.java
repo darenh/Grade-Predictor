@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 double theta[] = {0, 0.8};
                 regression.setM(m);
                 j = 0;
+                // 6 is the hours we want to guess
                 j = regression.main(x, y, theta,6);
                 int s = (int)j;
                 if (j > 90)
